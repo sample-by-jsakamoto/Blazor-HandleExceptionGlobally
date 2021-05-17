@@ -1,0 +1,23 @@
+@inject IToastService Toast
+@inject ILogger<App> Logger
+<BlazoredToasts />
+
+<div>
+    <button @onclick="OnClickException">EXCEPTION</button>
+</div>
+
+@code
+{
+    private void OnClickException()
+    {
+        try
+        {
+            throw new NotImplementedException("On cliked the exception button.");
+        }
+        catch (Exception e)
+        {
+            this.Logger.LogError(e, e.Message);
+            this.Toast.ShowError(e.Message);
+        }
+    }
+}
